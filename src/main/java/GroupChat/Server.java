@@ -25,26 +25,25 @@ public class Server extends Thread{
     }
 
     ///
-    /// Versuche einen Serversocket auf dem Port zu erstellen, setze dann isRunning auf true.
-    /// Warte dann in einer Schleife, solange der Server aktiv läuft und akzeptiere eingehende Verbindungen auf dem Serversocket.
+    /// Erstelle einen Serversocket auf dem Port, setze dann isRunning auf true.
+    /// Akzeptiere eingehende Verbindungen auf dem Serversocket.
     /// Jede neue Verbindung wird durch einen neuen ClientHandler verarbeitet, der in activeClients gespeichert wird.
     /// FÜR TESTS WICHTIG: Füge nach dem Erstellen des ServerSockets diese Zeile ein: serverSocket.setSoTimeout(1000);
     ///
     public void run() {
-        //todo: Erstellen des Sockets
+        //todo erstelle den Serversocket
 
-        /*
-        while (isRunning) {
+        while (isRunning){
             try {
-                //todo Akzeptiere eingehende Verbindungen und weise ihnen einen Handler zu und speichere sie in activeClients
+                var clientSocket = serverSocket.accept();
+                //todo verarbeite die eingehende Verbindung
             } catch (SocketTimeoutException e) {
-                // Dieser Catch Block ist nur für den Socket Timeout relevant, du musst hier keinen eigenen Code schreiben, platziere
-                //deine eigenen Catch-Anweisungen aber nach diesem Block
+                // Dieser Catch Block ist nur für den Socket Timeout relevant, du musst hier keinen eigenen Code schreiben
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         }
-        */ //Auskommentiert damit alles weiterhin kompiliert
-
-        //todo Schließe den Server mithilfe von Shutdown
+        shutDown();
     }
 
     ///

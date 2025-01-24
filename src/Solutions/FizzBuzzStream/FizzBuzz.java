@@ -5,8 +5,6 @@ import java.util.stream.Stream;
 
 public class FizzBuzz {
 
-    .filter;
-
     ///
     /// Passe die Methode so an, dass sie einen Stream von Strings zurückgibt,
     /// wobei jedes Element passend auf die FizzBuzz-Regeln gemappt ist.

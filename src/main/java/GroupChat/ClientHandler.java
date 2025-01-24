@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class ClientHandler extends Thread{
-    private final Socket clientSocket;
+    private Socket clientSocket;
     private String username;
     private int clientId;
     private BufferedReader reader;
@@ -21,7 +21,6 @@ public class ClientHandler extends Thread{
             //todo erstelle den Reader und Writer auf den Streams des Sockets
             //todo Lese den Benutzernamen des Clients und gib folgendes auf der Konsole aus "<username> connected"
             username = reader.readLine();
-            System.out.println(username + " connected");
         } catch (IOException e) {
             System.out.println("Error creating Client");
             server.removeClient(clientId);
@@ -30,20 +29,10 @@ public class ClientHandler extends Thread{
 
     ///
     /// Lies in einer Endlosschleife Nachrichten aus dem Socket. Schreibe jede Nachricht an alle anderen Clients.
-    /// Sollte eine Exception auftreten beende die Methode und schließe den Handler mit der close() Methode
+    /// Sollte eine Exception auftreten schließe den Handler mit close() und entferne den Client aus dem Server
     ///
     public void run() {
-        try {
-            while (true) {
-                var message = reader.readLine();
-                server.writeToAllClients(clientId, username + ": " + message);
-            }
-        } catch (IOException e) {
-            System.out.println("Error reading from client " + username);
-        } finally {
-            System.out.println("Client " + username + " disconnected");
-            close();
-        }
+        //todo
     }
 
     public void WriteToClient(String message) {
@@ -51,10 +40,10 @@ public class ClientHandler extends Thread{
     }
 
     ///
-    /// Schließe den Socket des Clients und entferne den Client aus dem Server
+    /// Schließe den Socket des Clients
     ///
-    private void close() {
-
+    public void close() {
+        //todo
     }
 
 
