@@ -45,7 +45,6 @@ public class Client {
     /// Sollte der Thread unterbrochen werden, beende die Methode
     ///
     private void WriterThread() {
-        var consoleReader = new BufferedReader(new InputStreamReader(System.in)); //Nutze den ConsoleReader, um Nachrichten zu lesen
         //todo
     }
 

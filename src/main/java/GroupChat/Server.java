@@ -58,7 +58,8 @@ public class Server extends Thread{
     }
 
     ///
-    /// Iteriere über alle Clients und schließe sie, schließe anschließend auch den ServerSocket
+    /// Iteriere über alle ClientHandler und schließe sie, schließe anschließend auch den ServerSocket
+    /// Beachte, dass close bei ClientHandler auch auf activeClients zugreift
     ///
     private void shutDown() {
         //todo

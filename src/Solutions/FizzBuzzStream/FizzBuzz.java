@@ -11,7 +11,7 @@ public class FizzBuzz {
     /// Ein Beispiel für die Implementierung von FizzBuzz ist weiter unten gegeben.
     ///
     public static Stream<String> createFizzBuzz(IntStream input){
-        return return input.mapToObj(i -> {
+        return input.mapToObj(i -> {
             if (i % 3 == 0 && i % 5 == 0){
                 return "FizzBuzz";
             } else if (i % 3 == 0){
@@ -21,7 +21,7 @@ public class FizzBuzz {
             } else {
                 return Integer.toString(i);
             }
-        });;
+        });
     }
 
     ///
@@ -32,10 +32,10 @@ public class FizzBuzz {
         return input.filter(x -> x.matches("(Fizz|Buzz)*")).takeWhile(x -> !x.equals("FizzBuzz"));
     }
     ///Alternativ
-    public static Stream<String> findFirstFizzBuzz(Stream<String> input){
-        return input.filter(x -> x.equals("Fizz") || x.equals("Buzz") || x.equals("FizzBuzz"))
-                .takeWhile(x -> !x.equals("FizzBuzz"));
-    }
+//    public static Stream<String> findFirstFizzBuzz(Stream<String> input){
+//        return input.filter(x -> x.equals("Fizz") || x.equals("Buzz") || x.equals("FizzBuzz"))
+//                .takeWhile(x -> !x.equals("FizzBuzz"));
+//    }
 
     ///
     /// Gebe die Summe aller Zahlen im Stream zurück. Elemente, die keine Zahlen sind, sollen

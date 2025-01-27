@@ -2,6 +2,7 @@ package GroupChat;
 
 import java.net.ServerSocket;
 import java.net.SocketTimeoutException;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Server extends Thread{
@@ -70,11 +71,13 @@ public class Server extends Thread{
     }
 
     ///
-    /// Iteriere über alle Clients und schließe sie, schließe anschließend auch den ServerSocket
+    /// Iteriere über alle ClientHandler und schließe sie, schließe anschließend auch den ServerSocket
+    /// Beachte, dass close bei ClientHandler auch auf activeClients zugreift
     ///
     private void shutDown() {
         try {
-            for (var client : activeClients.values()) {
+            List<ClientHandler> clients = List.copyOf(activeClients.values());
+            for (var client : clients) {
                 client.close();
             }
             serverSocket.close();

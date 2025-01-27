@@ -48,21 +48,17 @@ public class ClientTests {
     @Test
     public void TestWriteToServer() {
         try {
-            String simulatedInput = "Markus\r\n";
+            String simulatedInput = "Markus\nWas geht Leute?\n";
             InputStream inputStream = new ByteArrayInputStream(simulatedInput.getBytes());
             System.setIn(inputStream);
             var client = new Client("localhost", 8000);
             client.connect();
 
-            String otherClient = "Peter\r\n";
+            String otherClient = "Peter\nNicht viel, bei dir?";
             InputStream inputStream2 = new ByteArrayInputStream(otherClient.getBytes());
             System.setIn(inputStream2);
             var client2 = new Client("localhost", 8000);
             client2.connect();
-
-            simulatedInput = "Hallo Leute was geht\r\n";
-            inputStream = new ByteArrayInputStream(simulatedInput.getBytes());
-            System.setIn(inputStream);
 
             Thread.sleep(1000);
             client.close();
@@ -71,7 +67,7 @@ public class ClientTests {
             assertTrue(output.contains("Successfully established connection to server, you can now start chatting"), "Success message not as expected");
             assertTrue(output.contains("Please enter your username: "), "Please enter username message not as expected");
             assertTrue(output.contains("Markus connected"), "User connected not as expected");
-            assertTrue(output.contains("Hallo Leute was geht"), "Message not as expected");
+            assertTrue(output.contains("Was geht Leute?"), "Message not as expected");
 
         } catch (Exception e) {
             fail("Failed to connect to server with exception: " + e);

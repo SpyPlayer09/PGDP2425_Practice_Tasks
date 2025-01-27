@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import Helpers.ConsoleHelper;
 
 public class Client {
     private String username;
@@ -37,7 +38,7 @@ public class Client {
     public void connect() {
         try {
             System.out.println("Please enter your username: ");
-            String username = new BufferedReader(new InputStreamReader(System.in)).readLine();
+            String username = ConsoleHelper.readLine();
             socket = new Socket(serverAddress, port);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new PrintWriter(socket.getOutputStream(), true);
@@ -58,20 +59,17 @@ public class Client {
     /// Sollte der Thread unterbrochen werden, beende die Methode
     ///
     private void WriterThread() {
-        var consoleReader = new BufferedReader(new InputStreamReader(System.in));
         try {
             while (true) {
-                if (!consoleReader.ready()) {
+                if (!ConsoleHelper.ready()) {
                     Thread.sleep(100);
                     continue;
                 }
-                var message = consoleReader.readLine();
+                var message = ConsoleHelper.readLine();
                 writer.println(message);
             }
         } catch (InterruptedException e) {
             //Normal closing of the Thread
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 

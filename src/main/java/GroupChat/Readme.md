@@ -15,9 +15,11 @@ Die ClientTests hängen von der Implementierung aller 3 Klassen ab.
 
 # Hinweise
 Wenn du mehrere Clients bei dir lokal ausführen möchtest, kannst du in der Run Configuration
-unter Modify Options -> Allow Multiple Instances erlauben, dass du mehrere Instanzen des Programms
+unter `Modify Options -> Allow Multiple Instances` erlauben, dass du mehrere Instanzen des Programms
 gleichzeitig ausführen kannst.
 Standardmäßig verbinden die Clients nur auf den localhost, du kannst das jederzeit in der Main-Methode
 ändern, oder du fügst eigenen Code zum Angeben einer IP-Adresse hinzu.
+Deine IP-Adresse kannst du unter Windows mit `ipconfig` und unter Unix mit `ifconfig` in der Konsole herausfinden.
+
 
 

@@ -57,7 +57,7 @@ public class ClientHandler extends Thread{
     ///
     /// Schließe den Socket des Clients und entferne den Client aus dem Server
     ///
-    private void close() {
+    public void close() {
         try {
             clientSocket.close();
             server.removeClient(clientId);
