@@ -1,25 +1,19 @@
 package GameSaver;
 
-import java.io.IOException;
-
-import Helpers.ConsoleHelper;
+import Helpers.ConsoleReader;
 
 public class TicTacToe {
-
-    public static void main(String[] args) {
-        TicTacToe game = new TicTacToe();
-        game.playGame();
-    }
+    private Piece[][] board;
+    private boolean isXTurn = true;
+    private Piece winner = Piece.EMPTY;
+    private ConsoleReader consoleReader;
 
     public enum Piece {
         EMPTY, X, O
     }
 
-    private Piece[][] board;
-    private boolean isXTurn = true;
-    private Piece winner = Piece.EMPTY;
-
     public TicTacToe() {
+        consoleReader = new ConsoleReader();
         board = new Piece[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -49,7 +43,7 @@ public class TicTacToe {
         while (true) {
             try {
                 System.out.print(player + " Enter x and y coordinates <x y>: ");
-                String[] input = ConsoleHelper.readLine().split(" ");
+                String[] input = consoleReader.readLine().split(" ");
                 if (input[0].equals("exit")){
                     return false;
                 }

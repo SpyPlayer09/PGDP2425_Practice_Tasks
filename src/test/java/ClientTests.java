@@ -22,6 +22,7 @@ public class ClientTests {
     public void setup() {
         server = new Server(8000);
         server.start();
+        localOut.reset();
         System.setOut(new PrintStream(localOut));
     }
 
@@ -36,6 +37,9 @@ public class ClientTests {
             client.connect();
             client.close();
             String output = localOut.toString();
+
+            System.setOut(originalOut);
+            System.out.println(output);
 
             assertTrue(output.contains("Successfully established connection to server, you can now start chatting"), "Success message not as expected");
             assertTrue(output.contains("Please enter your username: "), "Please enter username message not as expected");

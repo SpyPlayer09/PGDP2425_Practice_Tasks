@@ -68,6 +68,7 @@ public class ServerTests {
         server.stopServer();
         try {
             server.join();
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             fail("Failed to stop server");
         }

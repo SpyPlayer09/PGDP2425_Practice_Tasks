@@ -1,11 +1,12 @@
 package GroupChat;
 
+import Helpers.ConsoleReader;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import Helpers.ConsoleHelper;
 
 public class Client {
     private String username;
@@ -18,9 +19,12 @@ public class Client {
     private Thread readerThread;
     private Thread writerThread;
 
+    private final ConsoleReader consoleReader;
+
     public Client(String serverAddress, int port) {
         this.serverAddress = serverAddress;
         this.port = port;
+        consoleReader = new ConsoleReader();
     }
 
 
@@ -38,7 +42,7 @@ public class Client {
     public void connect() {
         try {
             System.out.println("Please enter your username: ");
-            String username = ConsoleHelper.readLine();
+            String username = consoleReader.readLine();
             socket = new Socket(serverAddress, port);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new PrintWriter(socket.getOutputStream(), true);
@@ -61,11 +65,11 @@ public class Client {
     private void WriterThread() {
         try {
             while (true) {
-                if (!ConsoleHelper.ready()) {
+                if (!consoleReader.ready()) {
                     Thread.sleep(100);
                     continue;
                 }
-                var message = ConsoleHelper.readLine();
+                var message = consoleReader.readLine();
                 writer.println(message);
             }
         } catch (InterruptedException e) {

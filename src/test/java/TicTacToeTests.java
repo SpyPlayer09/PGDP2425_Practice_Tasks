@@ -118,10 +118,9 @@ public class TicTacToeTests {
 
     @Test
     public void TestGamePlayLoop1(){
-        var game = new TicTacToe();
-        var board = game.getBoard();
         var input = new ByteArrayInputStream("1 1\n1 2\n2 2\n2 3\n3 3\n".getBytes());
         System.setIn(input);
+        var game = new TicTacToe();
         game.playGame();
         assertTrue(game.checkForWinner(), "Winner not detected after game");
         assertEquals(game.getWinner(), TicTacToe.Piece.X, "Winner not set correctly");
@@ -129,10 +128,10 @@ public class TicTacToeTests {
 
     @Test
     public void TestGamePlayLoop2() throws IOException {
-        var game = new TicTacToe();
-        var board = game.getBoard();
         var input = new ByteArrayInputStream("1 1\n1 2\n2 2\n2 3\nsave TestFile\n".getBytes());
         System.setIn(input);
+        var game = new TicTacToe();
+        var board = game.getBoard();
         game.playGame();
         assertTrue(Files.exists(Path.of(GameSaver.GameSaver.savePath + "TestFile")), "File not created after saving");
         var loadedGame = GameSaver.GameSaver.LoadGame("TestFile");

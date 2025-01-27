@@ -3,10 +3,14 @@ package Helpers;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class ConsoleHelper {
-    private static final BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
+public class ConsoleReader {
+    private BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
 
-    public static String readLine() {
+
+    ///
+    /// Liest eine Zeile von der Konsole
+    ///
+    public String readLine() {
         try {
             return consoleReader.readLine();
         } catch (Exception e) {
@@ -14,7 +18,10 @@ public class ConsoleHelper {
         }
     }
 
-    public static boolean ready() {
+    ///
+    /// Gibt zurück, ob Daten auf der Konsole bereit zum Lesen sind
+    ///
+    public boolean ready() {
         try {
             return consoleReader.ready();
         } catch (Exception e) {

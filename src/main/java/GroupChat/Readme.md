@@ -12,6 +12,8 @@ wie gedacht. Du sollst am ehesten lokal selbst oder mit deinen Kommilitonen test
 Fehler treffen werdet. 
 Die ServerTests sollten ausführbar sein, wenn Server und ClientHandler implementiert sind.
 Die ClientTests hängen von der Implementierung aller 3 Klassen ab.
+Damit die Tests richtig funktionieren, solltest du alle Read-Operationen auf der Konsole mit dem consoleReader Attributen
+in den jeweiligen Klassen durchführen.
 
 # Hinweise
 Wenn du mehrere Clients bei dir lokal ausführen möchtest, kannst du in der Run Configuration

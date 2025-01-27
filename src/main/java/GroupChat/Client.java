@@ -1,8 +1,8 @@
 package GroupChat;
 
+import Helpers.ConsoleReader;
+
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
@@ -17,9 +17,12 @@ public class Client {
     private Thread readerThread;
     private Thread writerThread;
 
+    private final ConsoleReader consoleReader;
+
     public Client(String serverAddress, int port) {
         this.serverAddress = serverAddress;
         this.port = port;
+        consoleReader = new ConsoleReader();
     }
 
 
@@ -35,7 +38,6 @@ public class Client {
     /// Am Ende gebe "Successfully established connection to server, you can now start chatting" auf der Konsole aus.
     ///
     public void connect() {
-        //String username = new BufferedReader(new InputStreamReader(System.in)).readLine();
         //todo
     }
 
