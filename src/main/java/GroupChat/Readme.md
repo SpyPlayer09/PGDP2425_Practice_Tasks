@@ -7,8 +7,8 @@ Die Aufgabe legt starken Fokus auf Sockets, Threads und Exceptions.
 
 # Tests
 Die Tests zu dieser Aufgabe sind nur sehr rudimentär und sollen
-dir ein wenig Feedback dazu geben, ob die Klassen bereits so funktionieren
-wie gedacht. Du sollst am ehesten lokal selbst oder mit deinen Kommilitonen testen, da ihr dort leichter auf 
+dir ein wenig Feedback dazu geben, ob die Klassen bereits so funktionieren wie gedacht. 
+Du sollst am ehesten lokal selbst oder mit deinen Kommilitonen testen, da ihr dort leichter auf 
 Fehler treffen werdet. 
 Die ServerTests sollten ausführbar sein, wenn Server und ClientHandler implementiert sind.
 Die ClientTests hängen von der Implementierung aller 3 Klassen ab.
