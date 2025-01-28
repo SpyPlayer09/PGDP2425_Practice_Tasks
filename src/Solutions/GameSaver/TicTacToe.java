@@ -16,7 +16,12 @@ public class TicTacToe {
     ///
     public TicTacToe() {
         consoleReader = new ConsoleReader();
-        //todo
+        board = new Piece[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                board[i][j] = Piece.EMPTY;
+            }
+        }
     }
 
     ///
@@ -24,30 +29,63 @@ public class TicTacToe {
     /// Überprüfe auch, ob es bereits einen Gewinner gibt
     ///
     public TicTacToe(Piece[][] board, boolean isXTurn) {
-        //todo
+        this.board = board;
+        this.isXTurn = isXTurn;
+        checkForWinner();
     }
 
     ///
-    /// Drucke das Board aus und lass den richtigen Spieler seinen Zug machen, wiederhole das so lange, bis ein Zug
+    /// Drucke das Board aus und lass den richtigen Spieler seinen Zug machen, wiederhole das solange, bis ein Zug
     /// entweder das Spiel abbricht oder ein Spieler gewonnen hat
     /// Drucke dann das finale Board aus und gebe den Gewinner aus
     ///
     public void playGame() {
-        //todo
+        while (!checkForWinner()) {
+            printBoard();
+            boolean turn = makeTurn(isXTurn ? Piece.X : Piece.O);
+            if (!turn) return;
+        }
+        printBoard();
+        System.out.println("Player " + winner + " wins!");
     }
 
 
     ///
     /// Frage den Spieler nach den SpielKoordinaten im Format <x y> und setze das entsprechende Feld auf das Symbol des Spielers
     /// Sollte der Input "exit" sein, beende das Spiel ohne weiteres
-    /// Sollte der Input "save <filename>" sein, speichere das Spiel and der Stelle und beende das Spiel dann.
+    /// Sollte der Input "save <filename>" sein, speichere das Spiel und beende das Spiel dann.
     /// Sollte der Input ungültig sein, gib "Invalid input" aus und frage erneut nach den Koordinaten.
     /// Sollte das Feld bereits belegt sein, gib "Field already taken" aus und frage erneut nach den Koordinaten.
     /// Nachdem der Zug gemacht wurde, wechsle den Spieler.
     ///
     private boolean makeTurn(Piece piece) {
-        //todo
-        return false;
+        String player = piece == Piece.X ? "Player X:" : "Player O:";
+        while (true) {
+            try {
+                System.out.print(player + " Enter x and y coordinates <x y>: ");
+                String[] input = consoleReader.readLine().split(" ");
+                if (input[0].equals("exit")){
+                    return false;
+                }
+                if (input[0].equals("save")) {
+                    GameSaver.SaveGame(this, input[1]);
+                    return false;
+                }
+                int x = Integer.parseInt(input[0]) - 1;
+                int y = Integer.parseInt(input[1]) - 1;
+                if (board[x][y] == Piece.EMPTY) {
+                    board[x][y] = piece;
+                } else {
+                    System.out.println("Field already taken");
+                    continue;
+                }
+                isXTurn = !isXTurn;
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input");
+            }
+        }
+        return true;
     }
 
     ///
@@ -55,7 +93,29 @@ public class TicTacToe {
     /// Die Methode gibt true zurück, falls es einen Gewinner gibt, ansonsten false
     ///
     public boolean checkForWinner() {
-        //todo
+        //Check rows
+        for (int i = 0; i < 3; i++) {
+            if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != Piece.EMPTY) {
+                winner = board[i][0];
+                return true;
+            }
+        }
+        //Check columns
+        for (int i = 0; i < 3; i++) {
+            if (board[0][i] == board[1][i] && board[1][i] == board[2][i] && board[0][i] != Piece.EMPTY) {
+                winner = board[0][i];
+                return true;
+            }
+        }
+        //Check diagonals
+        if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != Piece.EMPTY) {
+            winner = board[0][0];
+            return true;
+        }
+        if (board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != Piece.EMPTY) {
+            winner = board[0][2];
+            return true;
+        }
         return false;
     }
 
@@ -65,8 +125,17 @@ public class TicTacToe {
     ///
     @Override
     public String toString() {
-        //todo
-        return "";
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                String ch = convertToString(board[i][j]);
+                sb.append(ch).append(" ");
+            }
+            sb.append("\n");
+        }
+        sb.append(isXTurn).append("\n");
+        sb.append(winner).append("\n");
+        return sb.toString();
     }
 
     ///

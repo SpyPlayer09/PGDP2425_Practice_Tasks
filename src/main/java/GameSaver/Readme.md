@@ -5,6 +5,8 @@ Implementiere zuerst die TicTacToe-Klasse (vor allem toString) und erst danach d
 Zuletzt kannst du in Main dann eine vollständige Implementierung des Spiels vornehmen.
 
 # Tests
+Die Tests prüfen deine Konsolen-Ausgaben nicht ab. Überlege dir also selbst, was sinnvolle Ausgaben an den
+jeweiligen Stellen wären. Dein Programm muss aber richtig mit den Keywords "save" und "exit" umgehen können.
 
 
 

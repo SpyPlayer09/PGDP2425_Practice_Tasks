@@ -143,4 +143,28 @@ public class TicTacToeTests {
         assertEquals(game.getIsXTurn(), loadedGame.getIsXTurn(), "Turn not loaded correctly");
         Files.deleteIfExists(Path.of(GameSaver.GameSaver.savePath + "TestFile"));
     }
+
+    @Test
+    public void TestExit(){
+        var input = new ByteArrayInputStream("1 1\n1 2\n2 2\n2 3\nexit\n".getBytes());
+        System.setIn(input);
+        var game = new TicTacToe();
+        var board = new TicTacToe.Piece[3][3];
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 3; j++){
+                board[i][j] = TicTacToe.Piece.EMPTY;
+            }
+        }
+        board[0][0] = TicTacToe.Piece.X;
+        board[0][1] = TicTacToe.Piece.O;
+        board[1][1] = TicTacToe.Piece.X;
+        board[1][2] = TicTacToe.Piece.O;
+        game.playGame();
+        assertFalse(game.checkForWinner(), "Winner detected after exit");
+        for (int i = 0; i < 3; i++){
+            for (int j = 0; j < 3; j++){
+                assertEquals(board[i][j], game.getBoard()[i][j], "Board not in the correct state after exit");
+            }
+        }
+    }
 }
